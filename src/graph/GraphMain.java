@@ -126,10 +126,20 @@ public class GraphMain {
         }
         
          g.display();
+         
+         
+         //define startVertex as per input arguments
+         g.startVertex = g.findsVertex(args[1]);
+         
+         //initialise numberworkspace and call GraphSearch method
+         NumberWorkSpace nws = new NumberWorkSpace(g);
+         g.GraphSearch(nws);
+         
+
 
          // Call the methods here starting on the starting vertex
-         if (BFS) g.simpleBFS(args[1]);
-         else g.simpleDFS(args[1]);
+         //if (BFS) g.simpleBFS(args[1]);
+         //else g.simpleDFS(args[1]);
          
          
     } // main
