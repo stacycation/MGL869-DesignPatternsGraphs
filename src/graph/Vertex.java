@@ -81,7 +81,9 @@ public class Vertex {
     if (visited) return;
     
     // Step 1.b: Action displays the vertex name
-    System.out.printf("BFT numbered search: vertex " + name + ", pre-order number " + VertexNumber);
+    System.out.printf("BFT numbered search: vertex " );
+    PrintWorkSpace p = new PrintWorkSpace(w);
+    p.print(this);
     
     // Step 2: Mark as visited, put the unvisited neighbors in the queue
     //     and make the recursive call on the first element of the queue
@@ -93,7 +95,11 @@ public class Vertex {
     // Step 3: do postVisitAction now, you are no longer going through the
     // node again
     w.postVisitAction(this);
-    System.out.println(", post-order number " + VertexPostNumber);
+    
+    PostOrderNumberWorkSpace pp = new PostOrderNumberWorkSpace(w);
+    pp.print(this);
+    
+    //System.out.println(", post-order number " + VertexPostNumber);
 
     // enqueues the vertices not visited
     for (Neighbor n : neighbors) {
@@ -126,15 +132,23 @@ public class Vertex {
     w.preVisitAction(this);
     if (visited) return;
 
+    
+    
     // Step 1.b: Action displays the vertex name
-    System.out.printf("DFT numbered search: vertex " + name + ", pre-order number " + VertexNumber);
+    System.out.printf("DFT numbered search: vertex " );
+    PrintWorkSpace p = new PrintWorkSpace(w);
+    p.print(this);
+    
     // Step 2: else remember that we've visited and
     //         visit all neighbors
     visited = true;
 
     // Step 3: do postVisitAction now
-    w.postVisitAction(this); //stacy i'm here. post-order numbering not working
-    System.out.println(", post-order number " + VertexPostNumber);
+    w.postVisitAction(this);
+    
+
+    PostOrderNumberWorkSpace pp = new PostOrderNumberWorkSpace(w);
+    pp.print(this);
     
     for (Neighbor n : neighbors) {
      v = n.end;

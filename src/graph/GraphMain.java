@@ -129,11 +129,9 @@ public class GraphMain {
          
          
          //define startVertex as per input arguments
-         g.startVertex = g.findsVertex(args[1]);
+         g.startVertex = g.findsVertex(args[1]);     
          
-         //initialise numberworkspace and call GraphSearch method
-         NumberWorkSpace nws = new NumberWorkSpace(g);
-         g.GraphSearch(nws);
+         g.NumberVertices();
          
 
 

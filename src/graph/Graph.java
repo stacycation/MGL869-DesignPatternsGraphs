@@ -170,18 +170,14 @@ public class Graph {
     //reorder LinkedList vertices so that it starts at the startVertex requested
     public void reorderVertices( ) {
     	int startIndex = vertices.indexOf(startVertex);
-    	System.out.printf("startVertex: ");
-    	startVertex.display();
-    	System.out.println("startIndex: " + startIndex);
-    	System.out.println("vertices.size(): " + vertices.size());
+    	//System.out.println("vertices.size(): " + vertices.size());
     	List <Vertex> tempList = vertices.subList(startIndex, vertices.size());
     	tempList.addAll(vertices.subList(0, startIndex));
     	 
     	//List <Vertex> tempList2 = vertices.subList(0, startIndex);
     	reorderedVertices.addAll(tempList);
     	
-    	//replacing vertices with reordered ones. doing this so i don't have to rewrite the graphsearches, etc.
-    	//might be an issue for graph.display but i don't think so.
+    	//replacing vertices with reordered ones
     	vertices = reorderedVertices; 
     	
     	//System.out.println( "reorderedVertices: " );
@@ -265,8 +261,10 @@ public class Graph {
     ///////////////////////////TP5 starts//////////////////
     // numbers vertices in pre-order form
     public void NumberVertices() {
-     GraphSearch( new NumberWorkSpace(this) );
+    	GraphSearch( new NumberWorkSpace(this) );
     }
+    
+    
 
     /**
      * Performs a search on the graph, either in BFS or DFS mode.
@@ -274,12 +272,16 @@ public class Graph {
      */
     public void GraphSearch( WorkSpace w ) {
     	
-    	System.out.println("--------------");
      // Step 1: initialize visited member of all nodes
      // if there are no vertices in the graph, then finish
      if ( vertices.size() == 0 ) return;
      
      reorderVertices();
+     
+     
+     //NumberVertices();
+     //PrintWorkSpace();
+     //PostNumberVertices();
 
      // Initializes the vertices calling the method init_vertex
      for (Vertex v : vertices)
