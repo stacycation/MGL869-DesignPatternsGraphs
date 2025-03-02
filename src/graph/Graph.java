@@ -22,8 +22,8 @@ public class Graph {
     public LinkedList<Vertex> vertices;
     public LinkedList<Edge> edges;
     
-    public LinkedList<Vertex> reorderedVertices;
-
+    Vertex startVertex;
+    public LinkedList<Vertex> reorderedVertices; //could be moved to local variable inside reorderVertices()
  
     /**
      * Opens the benchmark file
@@ -167,19 +167,24 @@ public class Graph {
         System.out.println( "******************************************" );
     } // of display
    
-    public void reorderVertices(Vertex startVertex) {
+    //reorder LinkedList vertices so that it starts at the startVertex requested
+    public void reorderVertices( ) {
     	int startIndex = vertices.indexOf(startVertex);
+    	//System.out.println("vertices.size(): " + vertices.size());
     	List <Vertex> tempList = vertices.subList(startIndex, vertices.size());
     	tempList.addAll(vertices.subList(0, startIndex));
     	 
     	//List <Vertex> tempList2 = vertices.subList(0, startIndex);
     	reorderedVertices.addAll(tempList);
     	
+    	//replacing vertices with reordered ones
+    	vertices = reorderedVertices; 
+    	
     	//System.out.println( "reorderedVertices: " );
         //for ( int i=0; i<reorderedVertices.size(); i++ )
         //    System.out.printf(reorderedVertices.get( i ).name + " ");
     }
-     
+   
    // **********************************************
    // **********************************************  
    // Implement your search methods here
@@ -189,11 +194,12 @@ public class Graph {
      * Note that this methods displays each node in the traversal order
      * @param vertexName
      */
+    /*
     public void simpleDFS(String vertexName) {
     	Vertex startVertex = findsVertex(vertexName);
     	
     	//reorder the list of vertices starting at the startVertex
-    	reorderVertices(startVertex);
+    	reorderVertices();
     	
     	//if start vertex does not exist, display message and finish
     	if (startVertex == null) {
@@ -216,18 +222,19 @@ public class Graph {
     	} // for
     	
     } // of DFS 
-
+*/
     
     /**
      * Your implementation of BFS
      * Note that this methods displays each node in the traversal order
      * @param vertexName
      */
+    /*
     public void simpleBFS(String vertexName) {
     	Vertex startVertex = findsVertex(vertexName);
     	
     	//reorder the list of vertices starting at the startVertex
-    	reorderVertices(startVertex);
+    	reorderVertices();
     	
     	// If start vertex does not exist
     	if (startVertex==null) {
@@ -248,22 +255,33 @@ public class Graph {
     			v.bftSimpleNodeSearch();
     		}
     	} // for
-    } // of BFS    
+    } // of BFS    */
     
+    
+    ///////////////////////////TP5 starts//////////////////
     // numbers vertices in pre-order form
     public void NumberVertices() {
-     GraphSearch( new NumberWorkSpace() );
+    	GraphSearch( new NumberWorkSpace(this) );
     }
+    
+    
 
     /**
      * Performs a search on the graph, either in BFS or DFS mode.
      * @param w
      */
     public void GraphSearch( WorkSpace w ) {
-
+    	
      // Step 1: initialize visited member of all nodes
      // if there are no vertices in the graph, then finish
      if ( vertices.size() == 0 ) return;
+     
+     reorderVertices();
+     
+     
+     //NumberVertices();
+     //PrintWorkSpace();
+     //PostNumberVertices();
 
      // Initializes the vertices calling the method init_vertex
      for (Vertex v : vertices)
@@ -289,7 +307,8 @@ public class Graph {
        // @feature DFS
        if (GraphMain.DFS) {
         // @debug
-        // System.out.println("DFS " + v.name);
+    	//
+        //System.out.println("DFS " + v.name);
         v.dftNodeSearch( w );
        }
        // --
